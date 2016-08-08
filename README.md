@@ -9,4 +9,4 @@ run `composer dump-autoload`
 
 Then publish the configuration file using the `vendor:publish`
 
-  php artisan vendor:publish
+  `php artisan vendor:publish`
