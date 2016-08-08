@@ -1,0 +1,16 @@
+{
+    "name": "mubin-khalid/events",
+    "description": "Libraray to publish message to Rethink DB using Node API",
+    "require": {
+        "illuminate/support": "^5.1",
+        "guzzlehttp/guzzle": "~5.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mubin",
+            "email": "mubin@brokergenius.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
