@@ -3,7 +3,7 @@
     "description": "Libraray to publish message to Rethink DB using Node API",
     "require": {
         "illuminate/support": "^5.1",
-        "guzzlehttp/guzzle": "~5.0"
+        "guzzlehttp/guzzle": "6.2.*"
     },
     "license": "MIT",
     "authors": [
