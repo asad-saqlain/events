@@ -12,5 +12,11 @@
             "email": "mubin@brokergenius.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+      "classmap": [
+      ],
+      "psr-4": {
+      }
+    }
 }
