@@ -14,10 +14,8 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-      "classmap": [
-      ],
       "psr-4": {
-        "Mubin\\Events\\" : "vendor/mubin-khalid/events/src"
+        "Mubin\\Events\\" : "src/"
       }
     }
 }
