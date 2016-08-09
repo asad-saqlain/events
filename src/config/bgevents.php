@@ -13,4 +13,10 @@ return [
     "push_user" => "localhost/user/push",
     "push_global" => "localhost/global/push",
     "push_notification" => "localhost/backend/push",
+
+    "rethink_db" => [
+        "host" => "localhost",
+        "port" => "port",
+        "db" => "db_name"
+    ],
 ];
