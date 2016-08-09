@@ -40,5 +40,6 @@ class ConsumeFeed extends Command
     public function handle()
     {
         $table = $this->option('table');
+        $this->consumer->watch($table);
     }
 }

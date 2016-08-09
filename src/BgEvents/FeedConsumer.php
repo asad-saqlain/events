@@ -21,7 +21,7 @@ class FeedConsumer
         $feed = r\table($table)->changes()->run($connection);
 
         foreach($feed as $change){
-            print_r($feed);
+            print_r($change);
         }
     }
 
