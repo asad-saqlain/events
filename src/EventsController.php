@@ -34,4 +34,12 @@ class EventsController extends Controller
         ];
         $this->publisher->publish('user', 'general', '', $notification);
     }
+
+    public function updateCode(){
+        $notification = [
+            'text' => "Update Code.",
+            'event_meta' => "bla bla bla"
+        ];
+        $this->publisher->publish('backend', 'backend', 'UpdateCode', $notification);
+    }
 }
