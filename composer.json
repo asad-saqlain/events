@@ -2,11 +2,11 @@
     "name": "mubin-khalid/events",
     "description": "Libraray to publish message to Rethink DB using Node API",
     "require": {
-        "illuminate/support": "^5.*",
-        "illuminate/console": "^5.*",
-        "illuminate/events": "^5.*",
-        "illuminate/log": "^5.*",
-        "illuminate/exception": "^5.*",
+        "illuminate/support": "^5.1",
+        "illuminate/console": "^5.1",
+        "illuminate/events": "^5.1",
+        "illuminate/log": "^5.1",
+        "illuminate/exception": "^5.1",
         "guzzlehttp/guzzle": "5.*",
         "danielmewes/php-rql": "2.3.0"
 
