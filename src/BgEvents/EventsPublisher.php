@@ -14,8 +14,6 @@ use \GuzzleHttp\Client as Guzzle;
  */
 class EventsPublisher
 {
-    protected $global_channel;
-    protected $user_channel;
     protected $guzzle;
 
     /**
