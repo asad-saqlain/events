@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mubin
- * Date: 8/8/2016
- * Time: 10:51 AM
- */
+
 namespace Mubin\Events\BgEvents;
 
 use \GuzzleHttp\Client as Guzzle;
@@ -36,18 +31,18 @@ class EventsPublisher
      * @param bool $per_user
      * @return bool|String
      */
-    public function publish($type, $component, $event_name = '', $data = [], $per_user = false){
+    public function publish($type, $component, $event_name = '', $data = [], $per_user = false)
+    {
         $emit = [
             "component_name" => $component,
             "message_payload" => [
                 'text' => $data['text']
             ]
         ];
-        if($type === "global"){
+        if ($type === "global") {
             $this->globalEvent($emit);
             return "Global Event Published";
-        }
-        elseif($type === "user"){
+        } elseif ($type === "user") {
             $emit['api_key'] = $data['api_key'];
             $emit['user_name'] = $data['user_name'];
             $emit['user_id'] = $data['user_id'];
@@ -55,10 +50,8 @@ class EventsPublisher
             $emit['account_type'] = $data['account_type'];
             $this->localEvent($emit);
             return 'User Event Published';
-        }
-        elseif ($type == 'backend' && $per_user)
-        {
-            if(isset($data['api_key'])){
+        } elseif ($type == 'backend' && $per_user) {
+            if (isset($data['api_key'])) {
                 $emit['api_key'] = $data['api_key'];
                 $emit['user_name'] = $data['user_name'];
                 $emit['user_id'] = $data['user_id'];
@@ -69,9 +62,7 @@ class EventsPublisher
                 $this->backendNotificationPerUser($emit);
             }
             return 'Backend Event Published';
-        }
-        elseif ($type == 'backend' && !$per_user)
-        {
+        } elseif ($type == 'backend' && !$per_user) {
             $emit['message_payload']['event_name'] = $event_name;
             $emit['message_payload']['event_meta'] = $data['event_meta'];
             $this->backendGlobalNotification($emit);
@@ -97,7 +88,8 @@ class EventsPublisher
      * @param array $emit
      * @return void
      */
-    private function localEvent($emit){
+    private function localEvent($emit)
+    {
         $this->guzzle->post(config('bgevents.push_user'), [
             'headers' => ['content-type' => 'application/json'],
             'body' => json_encode($emit)
@@ -109,17 +101,20 @@ class EventsPublisher
      * @param array $emit
      * @return void
      */
-    private function backendNotificationPerUser($emit){
+    private function backendNotificationPerUser($emit)
+    {
         $this->guzzle->post(config('bgevents.push_user'), [
             'headers' => ['content-type' => 'application/json'],
             'body' => json_encode($emit)
         ]);
     }
+
     /**
      * @param array $emit
      * @return void
      */
-    private function backendGlobalNotification($emit){
+    private function backendGlobalNotification($emit)
+    {
         $this->guzzle->post(config('bgevents.push_global'), [
             'headers' => ['content-type' => 'application/json'],
             'body' => json_encode($emit)
