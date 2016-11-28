@@ -1,25 +1,19 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Mubin
- * Date: 8/9/2016
- * Time: 3:50 PM
- */
 use Mubin\Events\BgEvents\EventsPublisher;
 
 class EventsPublisherTest extends TestCase
 {
     protected $publisher;
+
     public function setUp()
     {
         parent::setUp();
         $this->publisher = new EventsPublisher(new \GuzzleHttp\Client);
     }
 
-    public function testGlobalEventPublish(){
-
-
+    public function testGlobalEventPublish()
+    {
         $notification = [
             'text' => "Notification Pushed while testing."
         ];
@@ -28,7 +22,8 @@ class EventsPublisherTest extends TestCase
         $this->assertEquals($response, 'Global Event Published');
     }
 
-    public function testUserNotification(){
+    public function testUserNotification()
+    {
         $notification = [
             'text' => 'Test Notification',
             'api_key' => '11895ad1dc5770fbe93bff8a0611fc5c',
@@ -40,7 +35,9 @@ class EventsPublisherTest extends TestCase
         $response = $this->publisher->publish('user', 'general', '', $notification);
         $this->assertEquals($response, 'User Event Published');
     }
-    public function testGlobalBackendEventPublish(){
+
+    public function testGlobalBackendEventPublish()
+    {
 
 
         $notification = [
@@ -52,7 +49,8 @@ class EventsPublisherTest extends TestCase
         $this->assertEquals($response, 'Backend Event Published');
     }
 
-    public function testUserBackendNotification(){
+    public function testUserBackendNotification()
+    {
         $notification = [
             'text' => 'Test Notification',
             'api_key' => '11895ad1dc5770fbe93bff8a0611fc5c',
