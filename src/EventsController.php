@@ -23,7 +23,8 @@ class EventsController extends Controller
         $this->publisher->publish('global', 'price_update', '', $notification);
     }
 
-    public function userEvent(){
+    public function userEvent()
+    {
         $notification = [
             'text' => 'Code Updated.',
             'api_key' => '11895ad1dc5770fbe93bff8a0611fc5c',
@@ -35,7 +36,8 @@ class EventsController extends Controller
         $this->publisher->publish('user', 'general', '', $notification);
     }
 
-    public function updateCode(){
+    public function updateCode()
+    {
         $notification = [
             'text' => "Update Code.",
             'event_meta' => "bla bla bla"
