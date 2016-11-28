@@ -1,15 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mubin
- * Date: 8/9/2016
- * Time: 11:33 AM
- */
 
 namespace Mubin\Events\BgEvents;
 
 use r;
 use Mubin\Events\BgEvents\Subscriber;
+
 class FeedConsumer
 {
     protected $subscriber;
@@ -22,16 +17,17 @@ class FeedConsumer
     /**
      * @param $table String  Table name to watch for feeds.
      */
-    public function watch($table){
+    public function watch($table)
+    {
         $connection = $this->openConnection();
 
         $feed = r\table($table)->changes()->run($connection);
 
-        foreach($feed as $change){
-            if($change['new_val']['component'] == 'backend'){
+        foreach ($feed as $change) {
+            if ($change['new_val']['component'] == 'backend') {
                 $event_name = $change['new_val']['message_payload']['event_name'];
                 $event_meta = $change['new_val']['message_payload']['event_meta'];
-                $this->subscriber->fire(['event_name' => $event_name, 'event_meta' =>$event_meta]);
+                $this->subscriber->fire(['event_name' => $event_name, 'event_meta' => $event_meta]);
             }
         }
     }
@@ -39,11 +35,12 @@ class FeedConsumer
     /**
      * @return r\Connection
      */
-    public function openConnection(){
-        $host = config('bgevents.rethink_db.host');
+    public function openConnection()
+    {
+        $options = config('bgevents.rethink_db.options');
         $port = config('bgevents.rethink_db.port');
         $db = config('bgevents.rethink_db.db');
-        $connection = r\connect($host, $port, $db);
+        $connection = r\connect($options, $port, $db);
 
         return $connection;
     }
