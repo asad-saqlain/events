@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mubin
- * Date: 8/8/2016
- * Time: 11:00 AM
- */
 
 return [
     /**
@@ -17,7 +11,11 @@ return [
      * Rethink DB configurations.
      */
     "rethink_db" => [
-        "host" => "localhost",
+        "options" => [
+            "host" => "localhost",
+            "user" => "username",
+            "password" => "password"
+        ],
         "port" => "port",
         "db" => "db_name"
     ],
