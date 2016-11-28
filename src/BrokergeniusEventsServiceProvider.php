@@ -9,6 +9,7 @@ class BrokergeniusEventsServiceProvider extends ServiceProvider
     protected $commands = [
         "Mubin\\Events\\Commands\\ConsumeFeed"
     ];
+
     /**
      * Bootstrap the application services.
      *
@@ -17,7 +18,7 @@ class BrokergeniusEventsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/bgevents.php' => config_path('bgevents.php'),
+            __DIR__ . '/config/bgevents.php' => config_path('bgevents.php'),
         ]);
     }
 
@@ -29,7 +30,7 @@ class BrokergeniusEventsServiceProvider extends ServiceProvider
     public function register()
     {
 
-        include __DIR__.'/routes.php';
+        include __DIR__ . '/routes.php';
         $this->app->make('Mubin\Events\EventsController');
         $this->commands($this->commands);
     }
