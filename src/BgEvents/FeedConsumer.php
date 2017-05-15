@@ -37,11 +37,29 @@ class FeedConsumer
      */
     public function openConnection()
     {
-        $options = config('bgevents.rethink_db.options');
+        $host = config('bgevents.rethink_db.options.host');
         $port = config('bgevents.rethink_db.port');
         $db = config('bgevents.rethink_db.db');
-        $connection = r\connect($options, $port, $db);
-
+        $user = config('bgevents.rethink_db.options.user');
+        $password = config('bgevents.rethink_db.options.password');
+        $path = base_path('build/cacert.pem');
+        $connect_arr = [
+            'host' => $host,
+            'port' => $port,
+            'db' => $db,
+            'user' => $user,
+            'password' => $password,
+            'timeout' => 50,
+            'ssl' => [
+                'cafile' => $path,
+                'peer_fingerprint' => openssl_x509_fingerprint(file_get_contents($path)),
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+                'verify_depth' => 0
+            ]
+        ];
+        $connection = r\connect($connect_arr);
         return $connection;
     }
 }
