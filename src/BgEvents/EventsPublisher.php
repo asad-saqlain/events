@@ -18,6 +18,7 @@ class EventsPublisher
     function __construct(Guzzle $guzzle)
     {
         $this->guzzle = $guzzle;
+        $this->guzzle->setDefaultOption('verify',false);
 
     }
 
