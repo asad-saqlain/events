@@ -7,7 +7,7 @@
         "illuminate/events": "5.*",
         "illuminate/log": "5.*",
         "illuminate/exception": "5.*",
-        "guzzlehttp/guzzle": "5.*",
+        "guzzlehttp/guzzle": "6.*",
         "danielmewes/php-rql": "2.3.0"
 
     },
