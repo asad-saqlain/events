@@ -2,7 +2,7 @@
 
 namespace Mubin\Events\BgEvents;
 
-use \GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Client as Guzzle;
 
 /**
  * @author: Mubin
@@ -18,7 +18,7 @@ class EventsPublisher
     function __construct(Guzzle $guzzle)
     {
         $this->guzzle = $guzzle;
-        $this->guzzle->setDefaultOption('verify',false);
+        $this->guzzle->setDefaultOption('verify', false);
 
     }
 
@@ -35,8 +35,8 @@ class EventsPublisher
     public function publish($type, $component, $event_name = '', $data = [], $per_user = false)
     {
         $emit = [
-            "component_name" => $component,
-            "message_payload" => [
+            "component" => $component,
+            "payload" => [
                 'text' => $data['text']
             ]
         ];
@@ -45,27 +45,25 @@ class EventsPublisher
             return "Global Event Published";
         } elseif ($type === "user") {
             $emit['api_key'] = $data['api_key'];
-            $emit['user_name'] = $data['user_name'];
-            $emit['user_id'] = $data['user_id'];
-            $emit['user_email'] = $data['user_email'];
-            $emit['account_type'] = $data['account_type'];
+            $emit['created_by']['name'] = $data['user_name'];
+            $emit['created_by']['id'] = $data['user_id'];
+            $emit['created_by']['type'] = $data['account_type'];
             $this->localEvent($emit);
             return 'User Event Published';
         } elseif ($type == 'backend' && $per_user) {
             if (isset($data['api_key'])) {
                 $emit['api_key'] = $data['api_key'];
-                $emit['user_name'] = $data['user_name'];
-                $emit['user_id'] = $data['user_id'];
-                $emit['account_type'] = $data['account_type'];
-                $emit['user_email'] = $data['user_email'];
-                $emit['message_payload']['event_name'] = $event_name;
-                $emit['message_payload']['event_meta'] = $data['event_meta'];
+                $emit['created_by']['name'] = $data['user_name'];
+                $emit['created_by']['id'] = $data['user_id'];
+                $emit['created_by']['type'] = $data['account_type'];
+                $emit['payload']['event_name'] = $event_name;
+                $emit['payload']['event_meta'] = $data['event_meta'];
                 $this->backendNotificationPerUser($emit);
             }
             return 'Backend Event Published';
         } elseif ($type == 'backend' && !$per_user) {
-            $emit['message_payload']['event_name'] = $event_name;
-            $emit['message_payload']['event_meta'] = $data['event_meta'];
+            $emit['payload']['event_name'] = $event_name;
+            $emit['payload']['event_meta'] = $data['event_meta'];
             $this->backendGlobalNotification($emit);
 
             return 'Backend Event Published';

@@ -25,8 +25,8 @@ class FeedConsumer
 
         foreach ($feed as $change) {
             if ($change['new_val']['component'] == 'backend') {
-                $event_name = $change['new_val']['message_payload']['event_name'];
-                $event_meta = $change['new_val']['message_payload']['event_meta'];
+                $event_name = $change['new_val']['payload']['event_name'];
+                $event_meta = $change['new_val']['payload']['event_meta'];
                 $this->subscriber->fire(['event_name' => $event_name, 'event_meta' => $event_meta]);
             }
         }
